@@ -6,11 +6,10 @@ public class Sphere : Object
 {
     public float boundaries = 1, pivotPoint;
     private Vector3 startingPos;
-    private Rigidbody objRB;
 
-    private void Awake()
+    public override void Awake()
     {
-        objRB = GetComponent<Rigidbody>();
+        base.Awake();
         startingPos = transform.localPosition;
         pivotPoint = startingPos.x + boundaries;
     }
@@ -22,13 +21,13 @@ public class Sphere : Object
     {
         Traslation(speed);
     }
-
-    private void Traslation(float speed)
+    public void Traslation(float speed)
     {
         if (transform.localPosition.x > pivotPoint)
         {
             objRB.AddForce(Time.deltaTime * -speed, 0, 0, ForceMode.VelocityChange);
-        } else
+        }
+        else
         {
             objRB.AddForce(Time.deltaTime * speed, 0, 0, ForceMode.VelocityChange);
         }

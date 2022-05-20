@@ -5,23 +5,21 @@ using UnityEngine;
 public class Object : MonoBehaviour
 {
     public Material[] materials;
-    private Material objMat;
-    private Rigidbody objRB;
+    public Rigidbody objRB;
 
     public float speed = 5;
 
-    private void Awake()
+    public virtual void Awake()
     {
-        objMat = GetComponent<Renderer>().sharedMaterial;
         objRB = GetComponent<Rigidbody>();
         SetMaterial();
         ObjectMovement();
     }
 
-    void SetMaterial()
+    public void SetMaterial()
     {
         int randomMat = Random.Range(0, materials.Length);
-        objMat = materials[randomMat];
+        transform.GetComponent<Renderer>().sharedMaterial = materials[randomMat];
     }
 
     public virtual void ObjectMovement()
@@ -29,7 +27,7 @@ public class Object : MonoBehaviour
         Rotation(speed);
     }
 
-    void Rotation(float speed)
+    public void Rotation(float speed)
     {
         objRB.AddTorque(speed, speed, speed, ForceMode.Impulse);
     }
