@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveMachine : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static SaveMachine Instance;
+
+    public string playerName;
+    public int scorePoints, level;
+
+    private void Awake()
     {
-        
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    void StartGame()
     {
-        
+        SceneManager.LoadScene(1);
     }
 }
