@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Sphere : Object
 {
-    public float boundaries = 1;
-    private float boundLeft, boundRight;
+    public float boundaries = 1, pivotPoint;
     private Vector3 startingPos;
     private Rigidbody objRB;
 
@@ -13,8 +12,7 @@ public class Sphere : Object
     {
         objRB = GetComponent<Rigidbody>();
         startingPos = transform.localPosition;
-        boundLeft = startingPos.x - boundaries;
-        boundRight = startingPos.x + boundaries;
+        pivotPoint = startingPos.x + boundaries;
     }
     private void Update()
     {
@@ -27,7 +25,7 @@ public class Sphere : Object
 
     private void Traslation(float speed)
     {
-        if (transform.localPosition.x > boundRight)
+        if (transform.localPosition.x > pivotPoint)
         {
             objRB.AddForce(Time.deltaTime * -speed, 0, 0, ForceMode.VelocityChange);
         } else

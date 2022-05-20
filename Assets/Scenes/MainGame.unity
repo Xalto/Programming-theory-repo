@@ -479,8 +479,8 @@ GameObject:
   - component: {fileID: 1364976728}
   - component: {fileID: 1364976727}
   - component: {fileID: 1364976726}
-  - component: {fileID: 1364976730}
   - component: {fileID: 1364976725}
+  - component: {fileID: 1364976730}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -506,6 +506,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 11e8f09248b24514bb072493b33bce77, type: 2}
   speed: 5
   boundaries: 0.5
+  pivotPoint: 0
 --- !u!135 &1364976726
 SphereCollider:
   m_ObjectHideFlags: 0
