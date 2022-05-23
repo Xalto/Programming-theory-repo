@@ -5,16 +5,10 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject[] spawnables;
-    // Start is called before the first frame update
+
     void Start()
     {
         NewLevel();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void LevelUp()
@@ -29,10 +23,10 @@ public class Spawner : MonoBehaviour
 
     void SpawnObj(int total)
     {
-
         for (int i = 0; i < total; i++)
         {
-            Instantiate(spawnables[0], RandomPos(), transform.rotation);
+            int randomObj = Random.Range(0, spawnables.Length);
+            Instantiate(spawnables[randomObj], RandomPos(), transform.rotation);
         }
     }
 

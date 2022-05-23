@@ -24,4 +24,9 @@ public class SaveMachine : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void ScorePoints(int score)
+    {
+        scorePoints += score;
+    }
 }
