@@ -11,9 +11,10 @@ public class Spawner : MonoBehaviour
         NewLevel();
     }
 
-    void LevelUp()
+    public void LevelUp()
     {
         SaveMachine.Instance.level++;
+        NewLevel();
     }
 
     void NewLevel()

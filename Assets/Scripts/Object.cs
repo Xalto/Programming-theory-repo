@@ -6,7 +6,8 @@ public class Object : MonoBehaviour
 {
     public Material[] materials;
     public Rigidbody objRB;
-    public int objectID, scoreValue = 5;
+    public GameManager manager;
+    public int colID, shaID, scoreValue = 5;
 
     public float speed = 5;
 
@@ -15,6 +16,7 @@ public class Object : MonoBehaviour
         objRB = GetComponent<Rigidbody>();
         SetMaterial();
         ObjectMovement();
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         TrackID();
     }
 
@@ -34,40 +36,75 @@ public class Object : MonoBehaviour
         objRB.AddTorque(speed, speed, speed, ForceMode.Impulse);
     }
 
-    public void ScoreUp()
+    public void ScoreUp(int mult)
     {
-        SaveMachine.Instance.ScorePoints(scoreValue);
+        manager.ScorePoints(scoreValue * mult);
     }
 
-    void TrackID()
+    public void TrackID()
     {
-        int shape = 0;
-        int color = 0;
+        int shaID = 0;
+        int colID = 0;
+
         if (transform.GetComponent<Renderer>().material.name == "Red (Instance)")
         {
-            color = 1;
+            colID = 0;
         } else if (transform.GetComponent<Renderer>().material.name == "Green (Instance)")
         {
-            color = 2;
+            colID = 1;
         } else if (transform.GetComponent<Renderer>().material.name == "Blue (Instance)")
         {
-            color = 3;
+            colID = 2;
         }
 
         if (transform.name == "Sphere(Clone)")
         {
-            shape = 1;
+            shaID = 0;
         }
         else if (transform.name == "Cube(Clone)")
         {
-            shape = 2;
+            shaID = 1;
         }
         else if (transform.name == "Capsule(Clone)")
         {
-            shape = 3;
+            shaID = 2;
         }
 
-        objectID = (shape * 10 + color);
-        Debug.Log(objectID.ToString());
+        Debug.Log(colID.ToString() + ", " + shaID.ToString());
+    }
+
+    private void OnMouseDown()
+    { 
+        IDCheck();
+        SaveMachine.Instance.shaId = shaID;
+        SaveMachine.Instance.colId = colID;
+        Destroy(gameObject);
+        GameObject.Find("Spawner").GetComponent<Spawner>().LevelUp();
+    }
+
+    void IDCheck()
+    {
+        if (shaID == SaveMachine.Instance.shaId)
+        {
+            if (colID == SaveMachine.Instance.colId)
+            {
+                ScoreUp(2);
+            }
+            else if (colID != SaveMachine.Instance.colId)
+            {
+                ScoreUp(1);
+            }
+        }
+        else if (shaID != SaveMachine.Instance.shaId)
+        {
+            if (colID == SaveMachine.Instance.colId)
+            {
+                ScoreUp(1);
+            }
+            else if (colID != SaveMachine.Instance.colId)
+            {
+                ScoreUp(-1);
+            }
+        }
     }
 }

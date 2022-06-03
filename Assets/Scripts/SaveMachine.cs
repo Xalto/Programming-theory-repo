@@ -8,7 +8,7 @@ public class SaveMachine : MonoBehaviour
     public static SaveMachine Instance;
 
     public string playerName;
-    public int scorePoints, level;
+    public int scorePoints, level, colId, shaId;
 
     private void Awake()
     {
@@ -25,8 +25,4 @@ public class SaveMachine : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void ScorePoints(int score)
-    {
-        scorePoints += score;
-    }
 }
