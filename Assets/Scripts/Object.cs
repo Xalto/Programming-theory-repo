@@ -14,9 +14,9 @@ public class Object : MonoBehaviour
     public virtual void Awake()
     {
         objRB = GetComponent<Rigidbody>();
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         SetMaterial();
         ObjectMovement();
-        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         TrackID();
     }
 
@@ -43,9 +43,6 @@ public class Object : MonoBehaviour
 
     public void TrackID()
     {
-        int shaID = 0;
-        int colID = 0;
-
         if (transform.GetComponent<Renderer>().material.name == "Red (Instance)")
         {
             colID = 0;
@@ -78,12 +75,28 @@ public class Object : MonoBehaviour
         IDCheck();
         SaveMachine.Instance.shaId = shaID;
         SaveMachine.Instance.colId = colID;
-        Destroy(gameObject);
+        DestroyAll("Solid");
         GameObject.Find("Spawner").GetComponent<Spawner>().LevelUp();
+    }
+
+    void DestroyAll(string tag)
+    {
+        GameObject[] objectsInScene = GameObject.FindGameObjectsWithTag(tag);
+        foreach (GameObject item in objectsInScene)
+        {
+            Destroy(item);
+        }
     }
 
     void IDCheck()
     {
+        if (SaveMachine.Instance.shaId == 99)
+        {
+            SaveMachine.Instance.shaId = shaID;
+            SaveMachine.Instance.colId = colID;
+            ScoreUp(1);
+            return;
+        }
         if (shaID == SaveMachine.Instance.shaId)
         {
             if (colID == SaveMachine.Instance.colId)

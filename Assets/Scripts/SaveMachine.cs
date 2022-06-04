@@ -8,7 +8,7 @@ public class SaveMachine : MonoBehaviour
     public static SaveMachine Instance;
 
     public string playerName;
-    public int scorePoints, level, colId, shaId;
+    public int scorePoints, level, colId, shaId = 99;
 
     private void Awake()
     {

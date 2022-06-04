@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1945604496571923323}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 73f58cc6c710d634fa74033c05683cf1, type: 2}
   - {fileID: 2100000, guid: 11e8f09248b24514bb072493b33bce77, type: 2}
   objRB: {fileID: 0}
-  objectID: 0
+  manager: {fileID: 0}
+  colID: 0
+  shaID: 0
+  scoreValue: 5
   speed: 5
   boundaries: 0.5
   pivotPoint: 0
