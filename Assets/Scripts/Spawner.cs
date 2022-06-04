@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] spawnables;
 
-    void Start()
+    void Awake()
     {
         NewLevel();
     }

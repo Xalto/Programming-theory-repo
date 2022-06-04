@@ -8,7 +8,7 @@ public class SaveMachine : MonoBehaviour
     public static SaveMachine Instance;
 
     public string playerName;
-    public int scorePoints, level, colId, shaId = 99;
+    public int scorePoints, level = 1, colId, shaId = 99;
 
     private void Awake()
     {
@@ -18,11 +18,8 @@ public class SaveMachine : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(Instance);
     }
 
-    void StartGame()
-    {
-        SceneManager.LoadScene(1);
-    }
 
 }
